@@ -1,5 +1,5 @@
-import re
 import os
+import re
 
 def clean_html(string):
     pattern = re.compile(r'&lt;.*?&gt;')
@@ -31,3 +31,6 @@ def load(dataset_name):
         "cleaned_text": cleaned_text,
     }
     return result
+
+def tensor_to_numpy(tensor):
+    return tensor.clone().detach().cpu().numpy()
