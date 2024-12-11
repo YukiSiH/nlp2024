@@ -16,7 +16,8 @@ conda activate <environment_name>
 在实例上克隆项目：
 bash
 git clone https://github.com/Guoxoug/PTQ-acc-cal.git
-配置路径：
+或者直接复制（我是这样做的）
+配置路径（**必要步骤**）：
 进入experiment_configs目录，编辑配置文件：
 修改 "datapath" 指向数据集路径。
 设置 "results_savedir" 为结果保存路径。
@@ -35,7 +36,7 @@ chmod +x *
 bash
 ./<model>_<dataset>_train.sh
 ./<model>_<dataset>_test.sh
-替换 <model> 和 <dataset> 为你的具体配置。
+替换 <model> 和 <dataset> 为具体配置。
 监控和保存结果：
 通过SSH或JupyterLab监控进程。
 结果会保存到你配置的路径。
