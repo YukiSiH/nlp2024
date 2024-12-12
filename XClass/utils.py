@@ -1,3 +1,4 @@
+import numpy as np
 import os
 import re
 
@@ -16,6 +17,15 @@ def clean_str(string):
     string = re.sub(r"\s{2,}", " ", string)
     return string.strip()
 
+def tensor_to_numpy(tensor):
+    return tensor.clone().detach().cpu().numpy()
+
+def cosine_sim_embeddings(emb_a, emb_b):
+    return np.dot(emb_a, np.transpose(emb_b)) / np.outer(np.linalg.norm(emb_a, axis=1), np.linalg.norm(emb_b, axis=1))
+
+def cosine_sim_embedding(emb_a, emb_b):
+    return np.dot(emb_a, emb_b) / np.linalg.norm(emb_a) / np.linalg.norm(emb_b)
+
 def load(dataset_name):
     with open(os.path.join(dataset_name, 'dataset.txt'), mode='r', encoding='utf-8') as text_file:
         text = list(map(lambda x: x.strip(), text_file.readlines()))
@@ -31,6 +41,3 @@ def load(dataset_name):
         "cleaned_text": cleaned_text,
     }
     return result
-
-def tensor_to_numpy(tensor):
-    return tensor.clone().detach().cpu().numpy()
