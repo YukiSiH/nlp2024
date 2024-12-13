@@ -1,4 +1,4 @@
-README for Running PTQ-acc-cal on AutoDL
+README for Running PTQ-acc-cal on AutoDL（我是在AutoDL上完成的）
 
 # 准备工作
 选择镜像：选用包含PyTorch 1.7+和Python 3.6+的Ubuntu镜像。
