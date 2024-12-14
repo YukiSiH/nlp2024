@@ -1,6 +1,7 @@
 import numpy as np
 import os
 import re
+from sklearn.metrics import confusion_matrix, f1_score
 
 def clean_html(string):
     pattern = re.compile(r'&lt;.*?&gt;')
@@ -41,3 +42,23 @@ def load(dataset_name):
         "cleaned_text": cleaned_text,
     }
     return result
+
+
+def evaluate_predictions(true_class, predicted_class, output_to_console=True, return_tuple=False):
+    confusion = confusion_matrix(true_class, predicted_class)
+    if output_to_console:
+        print("-" * 80 + "Evaluating" + "-" * 80)
+        print(confusion)
+    f1_macro = f1_score(true_class, predicted_class, average='macro')
+    f1_micro = f1_score(true_class, predicted_class, average='micro')
+    if output_to_console:
+        print("F1 macro: " + str(f1_macro))
+        print("F1 micro: " + str(f1_micro))
+    if return_tuple:
+        return confusion, f1_macro, f1_micro
+    else:
+        return {
+            "confusion": confusion.tolist(),
+            "f1_macro": f1_macro,
+            "f1_micro": f1_micro
+        }
